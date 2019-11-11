@@ -1,0 +1,87 @@
+<ns-navbar></ns-navbar>
+<Tabs
+  selectedIndex="0"
+  (selectedIndexChanged)="onSelectedIndexChanged($event)"
+  class="">
+  <TabStrip class="">
+    <TabStripItem>
+      <Label text="📝"></Label>
+    </TabStripItem>
+    <TabStripItem class="special">
+      <Label text="👪"></Label>
+    </TabStripItem>
+    <TabStripItem class="special">
+      <Label text="📋"></Label>
+    </TabStripItem>
+    <TabStripItem class="special">
+      <Label text="Logout"></Label>
+    </TabStripItem>
+  </TabStrip>
+  <TabContentItem>
+    <StackLayout>
+      <Label [text]="'Todos - ' + currentList.substr(0, currentList.indexOf('abcdefg'))" class="mainLabels"></Label>
+      <GridLayout columns="*,*,*,*,*,*,*,*" rows="auto">
+        <Button [text]="'PRIORITY'" [class]="getPriorityClass()" (tap)="onPriorityToggle()" row="0" col="0" colspan="3"></Button>
+        <TextField class="input input-border addNotesInput" row="0" col="3" colspan="4" autocorrect="false" hint="Add new todo" (textChange)="onAddNotesInput($event)" [(ngModel)]="currentAddNotes"></TextField>
+        <Button [text]="'+'" class="blueButton" (tap)="addTodo()" row="0" col="7" colspan="1"></Button>
+      </GridLayout> 
+      <GridLayout columns="*,*,*,*,*,*,*,*" rows="auto">
+        <Button [text]="'↻'" class="blueButton" (tap)="getTodos()" row="0" col="0" colspan="1"></Button>
+        <TextField class="input input-border pad" autocorrect="false" hint="🔍Search" (textChange)="filter($event)" [(ngModel)]="currentSearchInput" row="0" col="1" colspan="7"></TextField>
+      </GridLayout> 
+      <ListView [height]="screenHeight" [items]="currentTodos">
+        <ng-template let-item="item" let-i="index">
+          <GridLayout columns="*,*,*,*,*,*,*,*,*" rows="*,*,*" [class]="getClass(i, item._id)">
+            <Button [text]="'DONE'" class="greenButton" (tap)="toggleTask('done', item.done, item._id)" row="0" col="0" colspan="2"></Button>
+            <Button [text]="'PRIORITY'" class="tealButton" (tap)="toggleTask('priority', item.priority, item._id)" row="0" col="2" colspan="3"></Button>
+            <Button [text]="'FLAG'" class="orangeButton" (tap)="toggleTask('flag', item.flag, item._id)" row="0" col="5" colspan="2"></Button>
+            <Button [text]="'DELETE'" class="redButton" (tap)="deleteTask(item._id)" row="0" col="7" colspan="2"></Button>
+            <Label [text]="'💾'" class="diskette" (tap)="onSave()" row="1" col="0" colspan="1"></Label>
+            <TextView (textChange)="onUpdateNotes($event, item._id)" [text]="item.notes" hint="Notes" [editable]="true" class="input input-border" row="2" rowspan="2" col="0" colspan="9"></TextView> 
+          </GridLayout>
+        </ng-template>
+      </ListView>  
+    </StackLayout>
+  </TabContentItem>
+  <TabContentItem>
+    <StackLayout>
+      <Label [text]="'Helpers - ' + currentList.substr(0, currentList.indexOf('abcdefg'))" class="mainLabels"></Label>
+      <GridLayout columns="*,*,*,*,*,*,*,*,*" rows="auto">
+        <TextField class="input input-border addNotesInput" row="0" col="0" colspan="4" autocorrect="false" hint="Helper Name" (textChange)="onHelperName($event)" [(ngModel)]="helperName"></TextField>
+        <TextField class="input input-border addNotesInput" keyboardType="phone" row="0" col="4" colspan="4" autocorrect="false" hint="Phone Number" (textChange)="onHelperPhoneNumber($event)" [(ngModel)]="helperPhoneNumber"></TextField>
+        <Button [text]="'+'" class="blueButton" (tap)="addHelper()" row="0" col="8" colspan="1"></Button>
+      </GridLayout>
+      <ListView [height]="screenHeight" [items]="currentHelpers">
+        <ng-template let-item="item" let-i="index"> 
+          <GridLayout columns="*,*,*,*,*,*,*,*,*" rows="auto">
+            <Label *ngIf="item.phone !== 0" [text]="item.name" row="0" col="0" colspan="4" class="helpers"></Label>
+            <Label *ngIf="item.phone !== 0" [text]="item.phone" row="0" col="4" colspan="4" class="helpers"></Label>
+            <Button *ngIf="item.phone !== 0" [text]="'-'" class="redButton" (tap)="clearHelper(item._id, item.phone)" row="0" col="8" colspan="1"></Button>
+          </GridLayout>
+        </ng-template>
+      </ListView>
+    </StackLayout>
+  </TabContentItem>
+  <TabContentItem>
+    <StackLayout>
+      <Label [text]="'Lists'" class="mainLabels"></Label>
+      <GridLayout columns="*,*,*,*,*,*,*,*,*" rows="auto">
+        <TextField class="input input-border addNotesInput" row="0" col="0" colspan="6" autocorrect="false" hint="List Name" (textChange)="onListNameInput($event)" [(ngModel)]="newListName"></TextField>
+        <Button [text]="'CREATE'" class="blueButton" (tap)="createList()" row="0" col="6" colspan="3"></Button>
+      </GridLayout>
+      <ListView [height]="screenHeight" [items]="currentLists">
+        <ng-template let-item="item" let-i="index"> 
+          <GridLayout columns="*,*,*,*,*,*,*,*,*" rows="auto">
+            <Label [text]="item.listname.substr(0, currentList.indexOf('abcdefg'))" row="0" col="0" colspan="6" class="helpers"></Label>
+            <Button *ngIf="item.deleteAccess" [text]="'DELETE'" class="redButton" row="0" col="6" (tap)="deleteList(item._id)" colspan="3"></Button>
+          </GridLayout>
+        </ng-template>
+      </ListView>
+    </StackLayout>
+  </TabContentItem> 
+  <TabContentItem>
+    <StackLayout>
+      <Label [text]="'Logging out ...'" class="mainLabels"></Label>
+    </StackLayout>
+  </TabContentItem> 
+</Tabs>

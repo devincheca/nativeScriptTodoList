@@ -1,0 +1,12 @@
+<ns-navbar></ns-navbar>
+<ScrollView height="500">
+  <StackLayout>
+    <Image [src]="imageSrc()" class="action-image"></Image>
+    <TextField keyboardType="phone" class="input input-border" autocorrect="false" hint="Enter phone number" (textChange)="onPhoneNumberInput($event)"></TextField>
+    <Label [text]="phoneNumberMessage" class="success"></Label>
+    <Button text="SEND LOGIN CODE" (tap)="sendCode()" row="0" col="0" colspan="4"></Button>
+    <TextField keyboardType="phone" class="input input-border" autocorrect="false" hint="Code" (textChange)="onCodeInput($event)"></TextField>
+    <Button text="LOGIN" (tap)="login()" row="0" col="4" colspan="4"></Button>
+    <Label [text]="errorMessage" class="fail"></Label>
+  </StackLayout>
+</ScrollView>

@@ -1,0 +1,82 @@
+.addNotesInput
+{
+  margin: 1em;
+  padding: 1em;
+}
+.blueButton
+{
+  background-color: blue;
+  color: white;
+}
+.greenButton
+{
+  background-color: green;
+  color: white; 
+}
+.orangeButton
+{
+  background-color: orange;
+  color: white;  
+}
+.redButton
+{
+  background-color: red;
+  color: white;
+}
+.tealButton
+{
+  background-color: teal;
+  color: white;
+}
+.mainLabels
+{
+  color: white;
+  background-color: #2196f3;
+  margin: 1em;
+  padding: 1em;
+  text-align: center;
+}
+.lightYellow
+{
+  background-color: #fff7b1;
+}
+.darkYellow
+{
+  background-color: #ffeb3b;
+}
+.helpers
+{
+  text-align: center;
+  vertical-align: middle;
+}
+.orange
+{
+  background-color: orange;
+}
+.red
+{
+  background-color: red;
+}
+.green
+{
+  background-color: lightgreen;
+}
+.padding
+{
+  padding: 1em;
+}
+.margin
+{
+  margin: 1em;
+}
+.diskette
+{
+  font-size: 25em;
+  margin: 1.25em;
+  padding: 1.25em; 
+}
+.centerTopTabs
+{
+  margin: auto;
+  text-align: center;
+}
